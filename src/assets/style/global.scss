@@ -1,0 +1,236 @@
+@media (max-width: 479px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+.forbid-pierce {
+  height: 100vh;
+  overflow: hidden;
+}
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0 !important;
+}
+
+:global(.swiper-button-prev) {
+  background-image: url('https://wechat-pics.fangpinduo.com/everestWebsite/kno_previous.svg') !important;
+  outline: none !important;
+  width: 40px !important;
+  height: 40px !important;
+  background-size: 44px 44px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+:global(.swiper-button-next) {
+  background-image: url('https://wechat-pics.fangpinduo.com/everestWebsite/kno_next.svg') !important;
+  width: 40px !important;
+  height: 40px !important;
+  background-size: 44px 44px !important;
+  outline: none !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) !important;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  box-shadow: 0 0 10px rgba(213, 164, 120, 1) !important;
+}
+
+.swiper-pagination-bullet {
+  background: #fff !important;
+  border: 1px solid #333;
+  opacity: 0.6 !important;
+  &.swiper-pagination-bullet-active {
+    border: 1px solid #d5a478;
+    background: #d5a478 !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .card-scroll-container {
+    width: auto;
+  }
+}
+
+.card-scroll-wrapper {
+  width: 310px;
+  padding: 0 10px;
+}
+
+.card-scroll-wrapper:hover {
+  margin-top: -5px;
+  transition: all .25s ease-out .2s;
+}
+
+.card-scroll-container-wrapper {
+  margin-right: 0;
+}
+
+@media (max-width: 767px) {
+  .card-scroll-container-wrapper {
+    padding: 0 20px 0 10px !important;
+  }
+}
+.group-share-lead {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9) url('https://wechat-pics.fangpinduo.com/wehome/website/static/image/wechat-share-tip-2.png') no-repeat center center;
+  background-size: 100% 100%;
+  z-index: 999999;
+}
+
+.wechat-share-lead-close {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40px;
+  background: #d5a478;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.error-text {
+  color: #FF5000;
+}
+
+.column-55.single-btn {
+  width: 100% !important;
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+}
+
+.card-progress-bar-desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    color: #999;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+.card-return-row.w-row {
+  position: relative;
+}
+.cube-arrow-top {
+  display: block;
+  position: absolute;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  width: 8px;
+  height: 8px;
+  transform: rotate(-45deg);
+  background: #fff;
+  top: -5px;
+  left: 20px;
+}
+
+.ratio-plus-singel {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ratio-plus-singel.prev {
+  left: -20px;
+}
+
+.ratio-plus-singel.next {
+  right: -20px;
+}
+
+.ratio-plus-center {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.w-col.ratio-plus-center-wrapper {
+  min-height: 40px;
+}
+
+
+/* notification scss */
+.datepicker{
+  padding: 0;
+  &>div:nth-of-type(1){
+    width:100%;
+    height:100%;
+  }
+  input{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+    display: block;
+    padding: 10px;
+  }
+}
+
+
+/* tooltip scss */
+.vue-tooltip.tooltip-custom {
+  background-color: #fff;
+  color: #666;
+  max-width: 240px;
+  font-size: 14px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  white-space: pre-wrap;
+}
+
+.vue-tooltip.tooltip-custom .tooltip-arrow {
+  border-color: #fff;
+}
+
+/* banner scss */
+.banner-title-global {
+  color: #fff;
+  margin: 0;
+  text-align: center;
+  @media (max-width: 767px) {
+    font-size: 28px;
+    padding: 0 20px;
+    line-height: 30px;
+  }
+  @media (max-width: 479px) {
+    font-size: 20px;
+  }
+  .banner-pc-only {
+    display: inline;
+    @media (max-width: 479px) {
+      display: none;
+    }
+  }
+  .banner-mob-only {
+    display: none;
+    @media (max-width: 479px) {
+      display: block;
+    }
+  }
+}
