@@ -349,7 +349,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "order-calc-sub-button",
           action: "click",
           optLabel: "button",
@@ -369,7 +369,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "order-calc-plus-button",
           action: "click",
           optLabel: "button",
@@ -396,7 +396,7 @@ export default {
       }
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'order-close-over-tip-popup',
         action: 'click',
         optLabel: 'popup',
@@ -490,7 +490,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "order-pay-submit-button",
           action: "click",
           optLabel: "submit",
@@ -578,7 +578,7 @@ export default {
       }
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'order-pay-over-tip-popup',
         action: 'click',
         optLabel: 'popup',
@@ -666,7 +666,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "order-qrcode-close-button",
           action: "click",
           optLabel: "button",
@@ -683,7 +683,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "order-close-service-qr-button",
           action: "click",
           optLabel: "button",

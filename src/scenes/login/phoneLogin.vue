@@ -49,7 +49,7 @@ export default {
     }
   },
 
-  activated () {
+  mounted () {
     const queryRedirect = this.$route.query.redirect || localStorage.getItem('redirect')
     if (queryRedirect) {
       this.redirect = queryRedirect

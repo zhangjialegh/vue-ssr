@@ -173,7 +173,7 @@ export default {
   } },
   methods: {
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'media-item-href',
         action: 'click',
         optLabel: 'href',

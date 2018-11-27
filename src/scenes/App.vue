@@ -25,6 +25,14 @@
         <p>请在微信客户端打开链接</p>
       </div>
     </template>
+    <pop-box :show-tip="showTip" :tip="tip">
+      <div class="w-row">
+        <div class="column-55 w-col w-col-6 single-btn">
+          <a class="button-14 w-button" @click="closePopTip">{{$t('知道了')}}</a>
+        </div>
+      </div>
+    </pop-box>
+    <!-- <loading-toast :show="showLoading"></loading-toast> -->
   </div>
 </template>
 
@@ -34,9 +42,9 @@
   import AppMobNav from './AppMobNav.vue'
   import { GET_COUNTRIES_ACTION } from '@/scenes/home/modules'
   import { GET_USER_NOTICE_UNREAD_ACTION } from '@/scenes/mine/modules'
-  import { STORAGE_KEY,GET_USER_LOGIN_INFO_ACTION } from '@/scenes/login/modules'
+  import { STORAGE_KEY,GET_USER_LOGIN_INFO_ACTION,WECHATLOGIN_URL_ACTION,LOGIN_OUT_ACTION } from '@/scenes/login/modules'
   import { GET_BLOG_LIST_ACTION,GET_COMPANY_INTRO_ACTION } from '@/scenes/about/modules.js'
-
+  import { HIDE_POP_BOX } from '@/common/Alert/modules'
   export default {
     name: 'app',
     components: {
@@ -45,9 +53,22 @@
       AppMobNav
     },
     methods:{
+      closePopTip() {
+        this.$store.dispatch(LOGIN_OUT_ACTION)
+        this.$store.commit(HIDE_POP_BOX)
+        const path = this.$route.fullPath
+        if(this.isWeixin) {
+          this.$store.dispatch(WECHATLOGIN_URL_ACTION,path)
+        } else {
+          this.$router.push({
+            path: '/login',
+            query: {
+              redirect: path
+            }
+          })
+        }
+      },
       initialI18n() {
-        console.log(this.locale,'this.locale kdj');
-        
         if(process.env.VUE_ENV !== 'server') {
           this.$i18n.locale = this.locale
         }
@@ -56,6 +77,10 @@
         const key = this.$store.state.base.cookies[STORAGE_KEY]
          if(key) {
             this.$store.dispatch(GET_USER_LOGIN_INFO_ACTION, {Authorization:key})
+            .then((res)=>{
+              localStorage.removeItem('redirect')
+              res.rf && localStorage.setItem('self_code', res.rf)
+            })
           }
       },
       getCountries() {
@@ -87,9 +112,6 @@
       }
     },
     created() {
-      
-      // 自动登录
-      this.autoLogin()
       // 初始化页面语言
       this.initialI18n()
       // 获取区号列表
@@ -99,7 +121,8 @@
       this.getCompanyInfo()
     },
     mounted() {
-      
+      // 自动登录
+      this.autoLogin()
       // 加载Intercom
       const {isWeixin,auth} = this
       if(!isWeixin) {
@@ -113,7 +136,7 @@
     computed: {
       h5Weixin() {
         return true
-        // this.$store.state.base.h5Weixin
+        // return this.$store.state.base.h5Weixin
       },
       isWeixin() {
         return this.$store.state.base.isWeixin
@@ -123,6 +146,12 @@
       },
       locale() {
         return this.$store.state.base.locale
+      },
+      showTip() {
+        return this.$store.state.alert.showTip
+      },
+      tip() {
+        return this.$store.state.alert.tip
       }
     }
   }
@@ -133,6 +162,7 @@
 <style lang="css" src="swiper/dist/css/swiper.css"></style>
 <style lang="css" src="vue-directive-tooltip/css/index.css"></style>
 <style lang="scss" src="@/assets/style/global.scss"></style>
+<style lang="scss" src="@/assets/style/wx_nav.scss"></style>
 
 <style lang="scss" scoped>
   .website-container {

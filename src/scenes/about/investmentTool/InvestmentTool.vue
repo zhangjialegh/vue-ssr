@@ -44,7 +44,7 @@ export default {
   } },
   methods: {
     @track(after(function () {
-    Track.eventTrack({
+    Track.eventTrack(this.$store,{
         category: 'investment-tool-tab',
         action: 'click',
         optLabel: 'tab',

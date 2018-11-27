@@ -32,7 +32,7 @@ export default {
   methods: {
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "proof-preview-download",
           action: "click",
           optLabel: "download",

@@ -91,7 +91,7 @@
     },
     methods: {
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'invest_rank',
           action: 'click',
           optLabel: 'href',
@@ -122,7 +122,7 @@
         }
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'experiencegold-close-poptip-button',
           action: 'click',
           optLabel: 'button',

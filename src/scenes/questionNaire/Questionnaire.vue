@@ -148,7 +148,7 @@ export default {
       })
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'questionnaire-close-experence-qr-button',
         action: 'click',
         optLabel: 'button',
@@ -223,7 +223,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "questionnaire-submit",
           action: "click",
           optLabel: "submit",
@@ -289,7 +289,7 @@ export default {
       this.showTip = true
     },
     @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'questionnaire-close-tip-popup',
           action: 'click',
           optLabel: 'popup',
@@ -302,7 +302,7 @@ export default {
       this.needReview = false
     },
     @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'questionnaire-close-experience-popup',
           action: 'click',
           optLabel: 'popup',

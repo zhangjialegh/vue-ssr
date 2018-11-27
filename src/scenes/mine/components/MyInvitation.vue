@@ -42,7 +42,7 @@ export default {
   data () { return {
     invitationList: [],
     showShareShadow: false,
-    slink: '/invest'+'&from_id='+this.$store.state.user.id
+    slink: '/invest'+'&from_id='+this.$store.state.auth.user.id
   } },
   methods: {
     getInvitationList: function () {
@@ -53,7 +53,7 @@ export default {
       })
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'invitation-button',
         action: 'click',
         optLabel: 'button',
@@ -68,7 +68,7 @@ export default {
         wx.miniProgram.getEnv(function(res) {
         if(res.miniprogram) {
           wx.miniProgram.navigateTo({
-            url: '/pages/invitationCard/invitationCard?fullpath=/invest'+'&from_id='+that.$store.state.user.id+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_MYINVITE+'&token='+that.$store.state.auth.acsToken+'&avatar='+that.$store.state.user.avatar+'&name='+that.$store.state.user.name
+            url: '/pages/invitationCard/invitationCard?fullpath=/invest'+'&from_id='+that.$store.state.auth.user.id+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_MYINVITE+'&token='+that.$store.state.auth.auth.acsToken+'&avatar='+that.$store.state.auth.user.avatar+'&name='+that.$store.state.auth.user.name
           })
         } else {
           that.$router.push({
@@ -85,7 +85,7 @@ export default {
       }
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'invitation-close-share-button',
         action: 'click',
         optLabel: 'button',

@@ -159,7 +159,7 @@ export default {
       this.showShadow = true
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'balance-close-market-bid-offer-records-button',
         action: 'click',
         optLabel: 'button',
@@ -172,7 +172,7 @@ export default {
       this.showShadow = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'balance-market-cancel-charge-button',
         action: 'click',
         optLabel: 'button',
@@ -191,7 +191,7 @@ export default {
     },
 
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'balance-to-detail-router',
         action: 'click',
         optLabel: 'router',
@@ -263,7 +263,7 @@ export default {
       })
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'balance-dropdown',
         action: 'click',
         optLabel: 'dropdown',

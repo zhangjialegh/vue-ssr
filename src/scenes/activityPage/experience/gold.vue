@@ -128,7 +128,7 @@
         this.showShareShadow = msg
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'experiencegold-invitation-button',
           action: 'click',
           optLabel: 'button',
@@ -143,7 +143,7 @@
           wx.miniProgram.getEnv(function(res) {
           if(res.miniprogram) {
             wx.miniProgram.navigateTo({
-              url: '/pages/invitationCard/invitationCard?fullpath='+that.$route.path+'&activity='+that.activityCode+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_EXP+'&token='+that.$store.state.auth.acsToken+'&avatar='+that.$store.state.user.avatar+'&name='+that.$store.state.user.name
+              url: '/pages/invitationCard/invitationCard?fullpath='+that.$route.path+'&activity='+that.activityCode+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_EXP+'&token='+that.$store.state.auth.auth.acsToken+'&avatar='+that.$store.state.auth.user.avatar+'&name='+that.$store.state.auth.user.name
             })
           } else {
             that.$router.push({
@@ -176,7 +176,7 @@
         }
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'experiencegold-close-poptip-button',
           action: 'click',
           optLabel: 'button',

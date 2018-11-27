@@ -21,11 +21,6 @@
 </template>
 
 <script>
-  import {
-    track,
-    after
-  } from "trackpoint-tools";
-  import Track from "@/track";
   export default {
     computed: {
       notice: function () {

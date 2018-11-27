@@ -243,7 +243,7 @@ export default {
             if(result.miniprogram) {
                that.showLoading=false
                wx.miniProgram.navigateTo({
-                  url: '/pages/wxpay/wxpay?orderId='+that.order_id+'&token='+ that.$store.state.auth.acsToken
+                  url: '/pages/wxpay/wxpay?orderId='+that.order_id+'&token='+ that.$store.state.auth.auth.acsToken
                 })
             } else {
               orderSource = 2

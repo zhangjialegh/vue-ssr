@@ -43,7 +43,7 @@
         })
       },
       @track(after(function () {
-        this.openId && Track.eventTrack({
+        this.openId && Track.eventTrack(this.$store,{
           category: 'faq-toggle',
           action: 'click',
           optLabel: 'toggle',

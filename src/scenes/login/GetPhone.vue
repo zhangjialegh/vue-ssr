@@ -42,7 +42,7 @@ export default {
     }
   },
 
-  activated () {
+  mounted () {
     const queryRedirect = this.$route.query.redirect
     if (queryRedirect) {
       this.redirect = queryRedirect
@@ -61,7 +61,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "getphone-login-submit",
           action: "click",
           optLabel: "submit",

@@ -188,9 +188,7 @@
       },
       selectLanguage: function (e) {
         if(typeof window !== 'undefined') {
-          console.log(e.target.dataset.id);
           this.$cookies.set("lng", e.target.dataset.id);
-          // this.$cookies.set('lng', e.target.dataset.id);
           if (this.$i18n.locale == e.target.dataset.id) {
             this.showLanguage = false;
           } else {
@@ -200,7 +198,7 @@
       },
       @track(
         after(function () {
-          Track.eventTrack({
+          Track.eventTrack(this.$store,{
             category: this.category,
             action: "click",
             optLabel: "href",
@@ -216,7 +214,7 @@
       },
       @track(
         after(function () {
-          Track.eventTrack({
+          Track.eventTrack(this.$store,{
             category: "minicode-close-button",
             action: "click",
             optLabel: "button",
@@ -230,7 +228,7 @@
       closeMiniCode: function () {
         if(typeof window !=='undefined') {
           this.showMiniCode = false;
-          this.$cookies.set("sun_sky", new Date().getTime());
+          localStorage.setItem("sun_sky", new Date().getTime());
         }
       },
       toggleGuide: function () {
@@ -244,7 +242,7 @@
       }
     },
     mounted() {
-      const timeStamp = this.$cookies.get("sun_sky");
+      const timeStamp = localStorage.getItem("sun_sky");
       if (timeStamp) {
         const deltaTime = (new Date().getTime() - timeStamp) / 1000 / 60 / 60;
         if (deltaTime >= 24) {

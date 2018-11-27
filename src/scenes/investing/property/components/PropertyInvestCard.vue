@@ -225,18 +225,18 @@ export default {
 
     invitation: function () {
       const that = this
-      this.slink = '/property?project_id='+this.id+'&from_id='+this.$store.state.user.id
+      this.slink = '/property?project_id='+this.id+'&from_id='+this.$store.state.auth.user.id
       if(this.isWeixin) {
         wx.miniProgram.getEnv(function(res) {
           if(res.miniprogram) {
             wx.miniProgram.navigateTo({
-              url: '/pages/invitationCard/invitationCard?fullpath=/property'+'&from_id='+that.$store.state.user.id+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_PROJECT+'&token='+that.$store.state.auth.acsToken+'&avatar='+that.$store.state.user.avatar+'&name='+that.$store.state.user.name+'&pid='+that.id
+              url: '/pages/invitationCard/invitationCard?fullpath=/property'+'&from_id='+that.$store.state.auth.user.id+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_PROJECT+'&token='+that.$store.state.auth.auth.acsToken+'&avatar='+that.$store.state.auth.user.avatar+'&name='+that.$store.state.auth.user.name+'&pid='+that.id
             })
           } else {
             that.$router.push({
               path: '/invitation',
               query: {
-                slink: '/property?project_id='+that.id+'&from_id='+that.$store.state.user.id,
+                slink: '/property?project_id='+that.id+'&from_id='+that.$store.state.auth.user.id,
                 invitedSource: that.GLOBAL.INVITE_SOURCE_PROJECT,
                 pId: that.id
               }
@@ -304,7 +304,7 @@ export default {
                   jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'] // 必填，需要使用的JS接口列表
               });
               const query = that.$route.query.project_id
-              const user = that.$store.state.user
+              const user = that.$store.state.auth.user
               let options = {
                   title: '投资美国房产，从未如此简单', // 分享标题
                   desc: '5000美金，就可坐拥房屋产权，享有所有房产投资收益', // 分享描述

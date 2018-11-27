@@ -145,7 +145,7 @@
     },
     methods: {
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'blog-item-href',
           action: 'click',
           optLabel: 'href',

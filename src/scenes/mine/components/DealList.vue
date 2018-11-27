@@ -147,7 +147,7 @@
         })
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'dealist-open-dealqr-button',
           action: 'click',
           optLabel: 'button',
@@ -162,7 +162,7 @@
         this.showDealQr = true;
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'dealist-close-dealqr-button',
           action: 'click',
           optLabel: 'button',
@@ -219,7 +219,7 @@
         })
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'deallist-cancel-tip-sure',
           action: 'click',
           optLabel: 'popup',
@@ -238,7 +238,7 @@
         })
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'deallist-cancel-order-tip-popup',
           action: 'click',
           optLabel: 'popup',
@@ -254,7 +254,7 @@
         this.tip = this.$t('确定要取消交易订单')
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'deallist-cancel-tip-close',
           action: 'click',
           optLabel: 'popup',

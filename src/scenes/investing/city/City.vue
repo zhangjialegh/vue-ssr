@@ -227,7 +227,7 @@ export default {
   },
   methods: {
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'change-group-city-button',
         action: 'click',
         optLabel: 'button',

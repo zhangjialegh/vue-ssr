@@ -290,7 +290,7 @@ export default {
       this.showTip = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'asset-group-project-detail-popup',
         action: 'click',
         optLabel: 'popup',
@@ -436,7 +436,7 @@ export default {
       })
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'asset-balance-dropdown',
         action: 'click',
         optLabel: 'dropdown',
@@ -476,7 +476,7 @@ export default {
   },
 
   @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'asset-showgroup-card-button',
         action: 'click',
         optLabel: 'button',

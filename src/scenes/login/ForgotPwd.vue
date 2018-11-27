@@ -83,7 +83,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "forgot-pwd-sms-button",
           action: "click",
           optLabel: "button",
@@ -103,7 +103,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "forgot-pwd-submit",
           action: "click",
           optLabel: "submit",

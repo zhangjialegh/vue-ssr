@@ -5,7 +5,7 @@
         <div class="invitation-container">
           <div class="invitation-title-bar" :style="{'background-image': `url(${titleBarList[bgIndex]})`}"></div>
           <h1 :style="{'color': fontColorList[bgIndex]}">{{$t('邀请卡')}}</h1>
-          <img :src="$store.state.user.avatar" alt="wehome">
+          <img :src="$store.state.auth.user.avatar" alt="wehome">
           <p class="invitation-p" :style="{'color': fontColorList[bgIndex]}">
             {{description}}
           </p>
@@ -121,9 +121,9 @@ export default {
       const that = this
       const { invitedSource } = this
       if(invitedSource == that.GLOBAL.INVITE_SOURCE_EXP) {
-        this.description = this.$t('GLOBAL.INVITE_FROM_EXP').replace('xx', this.$store.state.user.name)
+        this.description = this.$t('GLOBAL.INVITE_FROM_EXP').replace('xx', this.$store.state.auth.user.name)
       } else if (invitedSource == that.GLOBAL.INVITE_SOURCE_PROJECT && project) { //TODO------
-        this.description = this.$store.state.user.name +this.$t('正在WeHome参与')+project.title+'合投项目，共享'+toThousandPrt(project.appreciation_rate_one_year_forecast + project.rental_return_rate_net)+this.$t('估值报告每月更新')
+        this.description = this.$store.state.auth.user.name +this.$t('正在WeHome参与')+project.title+'合投项目，共享'+toThousandPrt(project.appreciation_rate_one_year_forecast + project.rental_return_rate_net)+this.$t('估值报告每月更新')
       } else if (invitedSource == that.GLOBAL.INVITE_SOURCE_CITYPARTNER) {
         this.description = '美国房产投资，从未如此简单；\n一起去美国合投一套房，5000美金享受年化10%-16%收益'
       }
@@ -200,7 +200,7 @@ export default {
         }
       } else if(invitedSource == that.GLOBAL.INVITE_SOURCE_PROJECT) {
         options = {
-          title: that.$store.state.user+this.$t('邀请你参与房产合投'), // 分享标题
+          title: that.$store.state.auth.user+this.$t('邀请你参与房产合投'), // 分享标题
           desc: this.$t('成功参与合投'), // 分享描述
           link: 'http://h5.fangpinduo.com/invited?slink='+slink+'&rf='+ that.$route.query.rf, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: 'https://wechat-pics.fangpinduo.com/share_logo.jpg', // 分享图标
@@ -211,7 +211,7 @@ export default {
         }
       } else if(invitedSource == that.GLOBAL.INVITE_SOURCE_CITYPARTNER) {
         options = {
-          title: that.$store.state.user.name+'邀请你开启全新投资方式', // 分享标题
+          title: that.$store.state.auth.user.name+'邀请你开启全新投资方式', // 分享标题
           desc: '限时发放5000美元体验金，马上领取', // 分享描述
           link: 'http://h5.fangpinduo.com/invited?slink='+slink+'&rf='+ that.$route.query.rf, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: 'https://wechat-pics.fangpinduo.com/share_logo.jpg', // 分享图标

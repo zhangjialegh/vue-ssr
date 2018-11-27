@@ -284,7 +284,7 @@
         )
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'return-ratio-tab',
           action: 'click',
           optLabel: 'tab',
@@ -298,7 +298,7 @@
         this.tabIndex = index
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'return-ratio-calc-dropdown',
           action: 'click',
           optLabel: 'dropdown',

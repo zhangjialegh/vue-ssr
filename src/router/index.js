@@ -7,14 +7,13 @@ import {
   addRefCode,
   checkRefCode,
   getStore,
-  getI18n
+  is_weixin
 } from '@/utils/utils'
 import {
   WECHATSCAN_LOGIN_ACTION,
-  GET_USER_LOGIN_INFO_ACTION,
-  WECHATLOGIN_URL_ACTION
+  GET_USER_LOGIN_INFO_ACTION
 } from '@/scenes/login/modules'
-// import Track from '@/track'
+import Track from '@/track'
 
 Vue.use(Router)
 
@@ -469,8 +468,6 @@ const router = new Router({
 /** web需要登录的页面路由拦截监控 **/
 function guardRoute(to, from, next) {
   // work-around to get to the Vuex store (as of Vue 2.0)
-  console.log(router.app,'router.app');
-  
   const $store = getStore(router)
   const auth = $store.state.auth.auth
   if (!auth.isLoggedIn) { // 如果没有登录
@@ -498,12 +495,7 @@ function guardRoute(to, from, next) {
         }
       })
     }
-    /** 未登录情况下的处理 **/
     else {
-      const isWeixin = $store.state.base.isWeixin
-      if (isWeixin) { //微信中如果未登录会在需要登录时，主动调起微信授权
-        $store.dispatch(WECHATLOGIN_URL_ACTION,to.fullPath)
-      }
       next()
     }
   } else {
@@ -514,50 +506,48 @@ function guardRoute(to, from, next) {
 
 // /** 特殊处理：小程序webview所有页面都需要用户先登录再进入 **/
 router.beforeEach((to, from, next) => {
-  const locale = getStore(router).state.base.locale
-  console.log(locale,'locale kbj');
-  next()
-//   const isWeixin = $store.state.base.isWeixin
-//   if (isWeixin) {
-//     wx.miniProgram.getEnv(function (res) {
-//       if (res.miniprogram) {
-//         guardRoute(to, from, next)
-//       } else {ççççç
-//         if(checkRefCode(to, $store)) {
-//           next()
-//         } else {
-//           next({path: addRefCode(to, $store)})
-//         }
-//       }
-//     })
-//   } else {
-//     if(checkRefCode(to, $store)) {
-//       next()
-//     } else {
-//       next({path: addRefCode(to, $store)})
-//     }
-//   }
+  if(process.env.VUE_ENV !== 'server') {
+      const isWeixin = is_weixin(navigator.userAgent)
+      if (isWeixin) {
+        wx.miniProgram.getEnv(function (res) {
+          if (res.miniprogram) {
+            guardRoute(to, from, next)
+          } else {
+            if(checkRefCode(to)) {
+              next()
+            } else {
+              next({path: addRefCode(to)})
+            }
+          }
+        })
+      } else {
+        if(checkRefCode(to)) {
+          next()
+        } else {
+          next({path: addRefCode(to)})
+        }
+      }
+  } else {
+    next()
+  }
 })
 
 // /** 对用户行为路径的Track **/
-// const uid = uuid()
-// router.afterEach((to, from) => {
-//   const auth = router.app.$options.store.state.auth
-//   const fromPath = from.fullPath
-//   const toPath = to.fullPath
-//   const obj = {
-//     id: uid,
-//     from: fromPath,
-//     to: toPath
-//   }
-//   if (from.query.scene && !router.app.$options.cookies.get('source_scene')) {
-//     router.app.$options.cookies.set('source_scene', from.query.scene)
-//   }
-//   if (auth.isLoggedIn) {
-//     obj.token = auth.acsToken
-//   }
-//   Track.routeTrack(obj)
-// })
+router.afterEach((to, from) => {
+  if(process.env.VUE_ENV !== 'server') {
+    const $store = getStore(router)
+    const fromPath = from.fullPath
+    const toPath = to.fullPath
+    const obj = {
+      from: fromPath,
+      to: toPath
+    }
+    if (from.query.scene && !localStorage.getItem('source_scene')) {
+      localStorage.setItem('source_scene', from.query.scene)
+    }
+    Track.routeTrack($store,obj)
+  }  
+})
 
 export default function createRouter() {
   return router

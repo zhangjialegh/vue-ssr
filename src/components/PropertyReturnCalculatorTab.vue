@@ -58,7 +58,7 @@ export default {
   methods: {
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "property-calc-sub-button",
           action: "click",
           optLabel: "button",
@@ -78,7 +78,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "property-calc-plus-button",
           action: "click",
           optLabel: "button",

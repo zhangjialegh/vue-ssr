@@ -45,7 +45,6 @@
               <li class="gold-text" @click="showList(child.user_id)">查看</li>
             </ul>
           </li>
-          
         </ul>
 
         <ul class="city_invite_body" v-else>
@@ -169,7 +168,7 @@ export default {
       this.show = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'city-partner-invitation-button',
         action: 'click',
         optLabel: 'button',
@@ -184,7 +183,7 @@ export default {
         wx.miniProgram.getEnv(function(res) {
         if(res.miniprogram) {
           wx.miniProgram.navigateTo({
-            url: '/pages/invitationCard/invitationCard?fullpath=/experiencegold'+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_CITYPARTNER+'&token='+that.$store.state.auth.acsToken+'&avatar='+that.$store.state.user.avatar+'&name='+that.$store.state.user.name
+            url: '/pages/invitationCard/invitationCard?fullpath=/experiencegold'+'&invitedsource='+that.GLOBAL.INVITE_SOURCE_CITYPARTNER+'&token='+that.$store.state.auth.auth.acsToken+'&avatar='+that.$store.state.auth.user.avatar+'&name='+that.$store.state.auth.user.name
           })
         } else {
           that.$router.push({

@@ -156,7 +156,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" src="@/assets/style/wx_nav.scss"></style>
+
 <style lang="scss" scoped>
 .wx-title {
   padding: 20px 20px;

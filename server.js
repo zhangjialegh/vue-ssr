@@ -1,5 +1,6 @@
 const express = require('express')
 const fs = require('fs')
+const LRU = require('lru-cache')
 const cookieParser = require('cookie-parser')
 const createLocaleMiddleware = require('express-locale')
 const path = require('path')
@@ -9,13 +10,42 @@ const { minify } = require('html-minifier')
 const app = express()
 const resolve = file => path.resolve(__dirname, file)
 
-const renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json'), {
-  runInNewContext: false,
-  template: fs.readFileSync(resolve('./index.template.html'), 'utf-8'),
-  clientManifest: require('./dist/vue-ssr-client-manifest.json'),
-  basedir: resolve('./dist'),
-  directives: {t:directive}
-})
+const isProd = process.env.NODE_ENV === 'production'
+
+
+function createRenderer(bundle, options) {
+  return createBundleRenderer(bundle, Object.assign(options, {
+    cache: LRU({
+      max: 1000,
+      maxAge: 1000 * 60 * 15
+    }),
+    runInNewContext: false,
+    basedir: resolve('./dist'),
+    directives: {t:directive}
+  }))
+}
+
+let renderer
+let readyPromise
+const templatePath = resolve('./index.template.html')
+if(isProd) {
+  const template = fs.readFileSync(templatePath, 'utf-8')
+  const bundle = require('./dist/vue-ssr-server-bundle.json')
+  const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+  renderer = createRenderer(bundle, {
+    template,
+    clientManifest
+  })
+} else {
+  readyPromise = require('./build/setup-dev-server')(
+    app,
+    templatePath,
+    (bundle, options) => {
+      renderer = createRenderer(bundle, options)
+    }
+  )
+}
+
 app.use(createLocaleMiddleware()).use(cookieParser())
 app.use(express.static(path.join(__dirname, 'dist')))
 app.get('*', (req, res) => {

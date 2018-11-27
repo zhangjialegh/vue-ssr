@@ -71,7 +71,7 @@ export default {
     };
   },
 
-  activated() {
+  mounted() {
     // set redirect url if there is any
     // mostly for beforeEnter: guardRoute
     const queryRedirect = this.$route.query.redirect || localStorage.getItem('redirect');
@@ -98,7 +98,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "signup-submit",
           action: "click",
           optLabel: "submit",

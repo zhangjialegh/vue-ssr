@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'invest-card-over-invest-tip-popup',
         action: 'click',
         optLabel: 'popup',

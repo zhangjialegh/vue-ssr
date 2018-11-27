@@ -78,7 +78,7 @@ export default {
     toThousandFix: toThousandFix,
     toThousandPrt: toThousandPrt,
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'revenue-detail-showfee-toggle',
         action: 'click',
         optLabel: 'toggle',

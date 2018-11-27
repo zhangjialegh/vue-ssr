@@ -140,3 +140,7 @@ export const POST_ACTIVITY_ACCEPTINVITE_API = API_HOSTNAME + '/api/activity/acce
 // epart
 export const GET_USER_SHOW_WELCOME_API = API_HOSTNAME + '/api/user/show_welcome'
 export const GET_CONTENT_FOLLOW_API = API_HOSTNAME + '/api/content/follow_us'
+
+// app
+
+export const POST_USER_TRACK_API = API_HOSTNAME + '/api/user/track'

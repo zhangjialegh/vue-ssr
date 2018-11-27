@@ -250,7 +250,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-close-pop",
           action: "click",
           optLabel: "button",
@@ -305,7 +305,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-price-sub-button",
           action: "click",
           optLabel: "button",
@@ -328,7 +328,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-price-plus-button",
           action: "click",
           optLabel: "button",
@@ -351,7 +351,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-num-sub-button",
           action: "click",
           optLabel: "button",
@@ -374,7 +374,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-num-plus-button",
           action: "click",
           optLabel: "button",
@@ -447,7 +447,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-submit-order-confirm",
           action: "click",
           optLabel: "button",
@@ -468,7 +468,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-cancel-order-confirm",
           action: "click",
           optLabel: "button",
@@ -485,7 +485,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-order-submit-order-button",
           action: "click",
           optLabel: "button",

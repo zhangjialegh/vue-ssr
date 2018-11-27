@@ -54,7 +54,7 @@ export default {
   methods: {
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "newusergift-qrcode-show-button",
           action: "click",
           optLabel: "button",
@@ -69,7 +69,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "newusergift-qrcode-close-button",
           action: "click",
           optLabel: "button",

@@ -249,7 +249,7 @@ export default {
       this.$router.push({ path: "/bank/addinfo", query: {} });
     }
   },
-  activated(){
+  created(){
     var that = this
     this.$store.dispatch(GET_USER_HUAMEI_ORDER_API)
     .then((res)=>{

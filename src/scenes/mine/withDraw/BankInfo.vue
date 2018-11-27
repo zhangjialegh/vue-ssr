@@ -181,7 +181,7 @@ export default {
       }
     },
     // @track(after(function () {
-    //   Track.eventTrack({
+    //   Track.eventTrack(this.$store,{
     //     category: 'order-close-over-tip-popup',
     //     action: 'click',
     //     optLabel: 'popup',

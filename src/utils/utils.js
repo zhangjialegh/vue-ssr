@@ -156,10 +156,6 @@ export const getStore = (router) => {
    return router.app.$store || router.app.$options.store
 }
 
-export const getI18n = (router) => {
-  return router.app.$options.i18n
-}
-
 export const h5_weixin = (params,ua) => {
   const hostname = params
   if (hostname.indexOf('wehome.io') > -1 || hostname === 'localhost' || hostname === '47.91.242.96' || (hostname ===
@@ -282,12 +278,11 @@ export const getQueryString = (search, name) => {
 };
 
 
-export const checkRefCode = (path, store) => {
-  const refCode = store.state.base.cookies['ref_code']
-  const obj = JSON.parse(localStorage.getItem('wehome-everest'))
+export const checkRefCode = (path) => {
+  const refCode = localStorage.getItem('ref_code')
   const fullPath = decodeURIComponent(path.fullPath)
   const urlCode = fullPath.match(/\Wrf=(\S*?)(&|$)/) ? fullPath.match(/\Wrf=(\S*?)(&|$)/)[1] : false
-  const selfCode = obj ? obj['user']['ref_code'] : false
+  const selfCode = localStorage.getItem('self_code')
   if(urlCode) {
     if(refCode) {
       if(selfCode) {
@@ -313,10 +308,9 @@ export const checkRefCode = (path, store) => {
   }
 }
 
-export const addRefCode = (path, store) => {
+export const addRefCode = (path) => {
   const refCode = localStorage.getItem('ref_code')
-  const obj = JSON.parse(localStorage.getItem('wehome-everest'))
-  const selfCode = obj ? obj['user']['ref_code'] : false
+  const selfCode = localStorage.getItem('self_code')
   const queryArr = Object.keys(path.query)
   let newQuery = ''
   if (queryArr.length > 0) {

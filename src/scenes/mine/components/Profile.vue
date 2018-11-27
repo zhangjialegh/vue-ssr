@@ -102,7 +102,7 @@ export default {
       })
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'profile-navigate-button',
         action: 'click',
         optLabel: 'button',
@@ -139,7 +139,7 @@ export default {
       }
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'profile-close-lecture-button',
         action: 'click',
         optLabel: 'button',

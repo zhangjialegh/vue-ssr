@@ -90,7 +90,7 @@ export default {
         const pathname = this.$route.name
         let url = 'http://h5.fangpinduo.com'
         if(pathname==='property') {
-          url = 'http://h5.fangpinduo.com'+'/property?project_id='+ this.categoryItem.id+'&from_id='+this.$store.state.user.id
+          url = 'http://h5.fangpinduo.com'+'/property?project_id='+ this.categoryItem.id+'&from_id='+this.$store.state.auth.user.id
           this.subTitle = '合投成功各获50美金'
         } else if (pathname==='experiencegold') {
           url = 'http://h5.fangpinduo.com/experiencegold?activity='+ this.activityCode

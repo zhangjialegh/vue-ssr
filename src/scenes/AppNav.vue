@@ -71,6 +71,7 @@
 
 <script>
   import {LOGIN_OUT_ACTION} from '@/scenes/login/modules'
+  
 
   export default {
     data() {
@@ -82,7 +83,9 @@
     },
     methods: {
       loginOut: function () {
-        this.$store.dispatch(LOGIN_OUT_ACTION)
+        this.$store.dispatch(LOGIN_OUT_ACTION).then(()=>{
+          location.href = '/login'
+        })
       },
       dropdown: function () {
         this.navOpen = true

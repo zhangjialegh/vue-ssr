@@ -236,7 +236,7 @@ export default {
     toThousandPrt: toThousandPrt,
     formatValidDate: formatValidDate,
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'assetdetail-close-report-list-pop',
         action: 'click',
         optLabel: 'pop',
@@ -249,7 +249,7 @@ export default {
       this.showReportList = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'assetdetail-operationReport-href',
         action: 'click',
         optLabel: 'href',
@@ -518,7 +518,7 @@ export default {
 
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "assetdetail-preview-download",
           action: "click",
           optLabel: "download",

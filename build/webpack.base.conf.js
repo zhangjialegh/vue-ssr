@@ -19,6 +19,8 @@ const createLintingRule = () => ({
   }
 })
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -27,7 +29,7 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: isProd
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
@@ -77,16 +79,8 @@ module.exports = {
       }
     ]
   },
-  node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
-    setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
+  performance: {
+    maxEntrypointSize: 300000,
+    hints: isProd ? 'warning' : false
   }
 }

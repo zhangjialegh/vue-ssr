@@ -304,7 +304,7 @@ export default {
       this.showReportList = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'property-operationReport-href',
         action: 'click',
         optLabel: 'href',
@@ -329,7 +329,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "project-certificate-download",
           action: "click",
           optLabel: "download",
@@ -345,7 +345,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "project-invest-tab",
           action: "click",
           optLabel: "tab",
@@ -361,7 +361,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "project-costing-tab",
           action: "click",
           optLabel: "tab",
@@ -422,7 +422,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "property-preview-fullscreen-button",
           action: "click",
           optLabel: "button",
@@ -439,7 +439,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "property-preview-close-button",
           action: "click",
           optLabel: "button",

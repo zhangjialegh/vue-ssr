@@ -85,7 +85,7 @@ export default {
     };
   },
 
-  activated() {
+  mounted() {
     // this.$auth.logout()
     // set redirect url if there is any
     // mostly for beforeEnter: guardRoute
@@ -105,7 +105,7 @@ export default {
   methods: {
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "login-submit",
           action: "click",
           optLabel: "submit",
@@ -132,9 +132,6 @@ export default {
             }
         });
       }
-    },
-    showMini : function() {
-      this.isWeiXin = true
     }
   }
 };

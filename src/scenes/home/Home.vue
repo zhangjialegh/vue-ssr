@@ -344,7 +344,7 @@
           </div>
         </div>
       </div>
-      <div class="div-block-151" :class="{'isWeixin': isWeiXin}" v-if="!$store.state.auth.isLoggedIn && showBar && locale!==GLOBAL.ZH_CN">
+      <div class="div-block-151" :class="{'isWeixin': isWeiXin}" v-if="!$store.state.auth.auth.isLoggedIn && showBar && locale!==GLOBAL.ZH_CN">
         <div class="container-39 w-container">
           <div class="row-81 w-row">
             <div class="w-col w-col-6">
@@ -412,7 +412,7 @@
         this.$store.dispatch(CHECK_QUALIFICATION_ACTION,{type: 'money_exp'})
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'new-home-show-video-popup',
           action: 'click',
           optLabel: 'popup',
@@ -428,7 +428,7 @@
         this.showVideoModel = msg
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'new-home-show-compare-popup',
           action: 'click',
           optLabel: 'popup',
@@ -449,7 +449,7 @@
       },
       closeBar: function () {
         this.showBar = false
-        this.$cookies.set("show_bar", new Date().getTime());
+        localStorage.setItem("show_bar", new Date().getTime());
       }
     },
     computed: {
@@ -464,9 +464,6 @@
       },
       crowfundProject() {
         return this.$store.state.home.rcmd_project_id
-      },
-      timeStamp() {
-        return this.$store.state.base.showBar
       }
     },
     mounted () {
@@ -474,7 +471,7 @@
       if(this.auth.isLoggedIn) {
         this.checkQualification()
       }
-      const {timeStamp} = this
+      const timeStamp = localStorage.getItem('show_bar')
       if (timeStamp) {
         const deltaTime = (new Date().getTime() - timeStamp) / 1000 / 60 / 60;
         if (deltaTime >= 24) {

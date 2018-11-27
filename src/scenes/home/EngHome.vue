@@ -179,7 +179,7 @@
     },
     methods: {
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'new-home-show-video-popup',
           action: 'click',
           optLabel: 'popup',

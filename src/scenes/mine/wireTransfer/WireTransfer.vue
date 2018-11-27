@@ -220,7 +220,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "recharge-income-flow-close-button",
           action: "click",
           optLabel: "button",
@@ -235,7 +235,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "recharge-huikuan-close-button",
           action: "click",
           optLabel: "button",
@@ -250,7 +250,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "recharge-huikuan-show-button",
           action: "click",
           optLabel: "button",
@@ -265,7 +265,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "upload-proof-submit",
           action: "click",
           optLabel: "submit",

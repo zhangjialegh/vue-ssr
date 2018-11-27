@@ -228,7 +228,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-card-showmoreorder-popup",
           action: "click",
           optLabel: "popup",
@@ -243,7 +243,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-card-close-moreinfo",
           action: "click",
           optLabel: "button",
@@ -258,7 +258,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-card-mapuri-href",
           action: "click",
           optLabel: "href",

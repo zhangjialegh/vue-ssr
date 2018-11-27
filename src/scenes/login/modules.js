@@ -28,7 +28,6 @@ export const MINIAPP_GET_USERINFO_ACTION = 'MINIAPP_GET_USERINFO_ACTION'
 export const LOGIN_OUT_ACTION = 'LOGIN_OUT_ACTION'
 export const CLEAR_ALL_DATA_ACTION = 'CLEAR_ALL_DATA_ACTION'
 export const STORE_TOKEN = 'STORE_TOKEN'
-export const STORE_TOKEN_NOT_COOKIES = 'STORE_TOKEN_NOT_COOKIES'
 export const STORAGE_KEY = 'wehome-everest'
 export const UPDATE_QUESTION_STATUS = 'UPDATE_QUESTION_STATUS'
 export const UPDATE_USER_PHONE_BIND = 'UPDATE_USER_PHONE_BIND'
@@ -69,7 +68,7 @@ const auth = {
           headers: payload,
           doHideAlert: true,
           success(result) {
-            commit(STORE_TOKEN_NOT_COOKIES, result)
+            commit(STORE_TOKEN, result)
             // 向前端通知操作成功
             resolve(result)
           },
@@ -155,8 +154,8 @@ const auth = {
         'code': payload.verificationCode,
         'password': payload.password,
         'subscribe_news': enableNotif,
-        'rf': this._vm.$cookies.get('ref_code') || null,
-        'scene': this._vm.$cookies.get('source_scene')
+        'rf': localStorage.getItem('ref_code') || null,
+        'scene': localStorage.getItem('source_scene') || null
       }
       return new Promise((resolve, reject) => {
         this._vm.$axios({
@@ -319,18 +318,20 @@ const auth = {
     },
 
     [LOGIN_OUT_ACTION]({ commit }) {
-      commit(CLEAR_ALL_DATA_ACTION)
-      commit(CLEAR_COOKIES)
+      return new Promise((resolve) => {
+        commit(CLEAR_ALL_DATA_ACTION)
+        commit(CLEAR_COOKIES)
+        resolve()
+      })
     },
   },
   mutations: {
     [CLEAR_ALL_DATA_ACTION](state) {
-      const { $cookies } = this._vm
       state.auth.isLoggedIn = false
       state.auth.acsToken = null
       state.user.name = ''
+      const { $cookies } = this._vm
       $cookies.remove(STORAGE_KEY)
-      location.href="/login"
     },
     [UPDATE_QUESTION_STATUS](state, payload) {
       state.user.reviewStatus = payload.review_status
@@ -339,29 +340,8 @@ const auth = {
     [UPDATE_USER_PHONE_BIND](state, payload) {
       state.user.bindPhone = payload.is_bind
     },
-    [STORE_TOKEN_NOT_COOKIES](state, payload) {
-      const auth = state.auth
-      const user = state.user
-
-      auth.isLoggedIn = true
-      auth.acsToken = payload.token
-
-      user.name = payload.name
-      user.avatar = payload.avatar
-      user.id = payload.user_id
-      user.ref_code = payload.rf
-      user.partner = payload.is_partner
-      user.reviewStatus = payload.review_status
-      user.permission = payload.has_permission
-      user.new = payload.is_new
-      user.bindPhone = payload.is_bind_phone
-      state.user = user
-      state.auth = auth
-    },
-
     [STORE_TOKEN](state, payload) {
       const { $cookies } = this._vm
-      $cookies.remove('redirect')
       const auth = state.auth
       const user = state.user
       auth.isLoggedIn = true
@@ -378,6 +358,10 @@ const auth = {
       state.user = user
       state.auth = auth
       $cookies.set(STORAGE_KEY, payload.token)
+      if(typeof window!=='undefined') {
+        localStorage.removeItem('redirect')
+        payload.rf && localStorage.setItem('self_code', payload.rf)
+      }
     }
   }
 }

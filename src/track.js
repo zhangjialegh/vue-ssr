@@ -1,4 +1,4 @@
-import Axios from './async'
+import {POST_USER_TRACK_ACTION} from '@/store/modules'
 import {
   platForm,
   uuid,
@@ -8,29 +8,22 @@ import {
 // global interceptor for the response
 
 export default {
-  eventTrack: function (data) {
-    data.ua = platForm()
-    data.time_stamp = Date.now()
-    data.id = uuid()
-    data.type='event'
-    data.client= is_weixin()? "h5service" : "website"
-    if (localStorage.getItem('wehome-everest')) {
-      data.token = JSON.parse(localStorage.getItem('wehome-everest'))['auth']['acsToken']
+  eventTrack: function (store,data) {
+    if(typeof window!== 'undefined') {
+      data.ua = platForm()
+      data.time_stamp = Date.now()
+      data.id = uuid()
+      data.type='event'
+      data.client= is_weixin()? "h5service" : "website"
+      // 本地开发是防止数据上传
+      if(window.location.hostname=='localhost') return;
+      store.dispatch(POST_USER_TRACK_ACTION, data)
     }
-    console.log(data, 'event')
-    // 本地开发是防止数据上传
-    if(window.location.hostname=='localhost') return;
-    Axios.post('/api/user/track', data, {
-      success: function (res) {
-      },
-      error: function (error) {
-        console.log(error)
-      }
-    })
   },
-  routeTrack: function (data) {
-    const isWeixin = is_weixin()
+  routeTrack: function (store,data) {
+    const isWeixin = is_weixin(navigator.userAgent)
     data.ua = platForm()
+    data.id = uuid()
     data.time_stamp = Date.now()
     data.type = 'path'
     if(isWeixin) {
@@ -40,27 +33,14 @@ export default {
         } else {
           data.client = 'h5service'
         }
-        console.log(data,'router')
-        if(window.location.hostname=='localhost') return;
-        Axios.post('/api/user/track', data, {
-          success: function (res) {
-          },
-          error: function (error) {
-            console.log(error)
-          }
-        })
+        if(location.hostname=='localhost') return;
+        store.dispatch(POST_USER_TRACK_ACTION, data)
+
       })
     } else {
       data.client = 'website'
-      console.log(data,'router')
       if(window.location.hostname=='localhost') return;
-      Axios.post('/api/user/track', data, {
-        success: function (res) {
-        },
-        error: function (error) {
-          console.log(error)
-        }
-      })
+      store.dispatch(POST_USER_TRACK_ACTION, data)
     }
   }
 }

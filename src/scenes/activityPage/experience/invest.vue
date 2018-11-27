@@ -174,7 +174,7 @@
         this.$store.dispatch(POST_ACTIVITY_ACCEPTINVITE_ACTION,{code})
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'experienceinvest-selectproject-button',
           action: 'click',
           optLabel: 'button',
@@ -205,7 +205,7 @@
         }
       },
       @track(after(function () {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: 'experienceinvest-close-expdrag-button',
           action: 'click',
           optLabel: 'button',

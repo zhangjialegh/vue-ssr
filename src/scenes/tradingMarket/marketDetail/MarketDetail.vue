@@ -265,7 +265,7 @@ export default {
       this.showReportList = false
     },
     @track(after(function () {
-      Track.eventTrack({
+      Track.eventTrack(this.$store,{
         category: 'market-operationReport-href',
         action: 'click',
         optLabel: 'href',
@@ -304,7 +304,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-detial-certificate-download",
           action: "click",
           optLabel: "download",
@@ -320,7 +320,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-detial-invest-tab",
           action: "click",
           optLabel: "tab",
@@ -336,7 +336,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-detial-costing-tab",
           action: "click",
           optLabel: "tab",
@@ -406,7 +406,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-detail-preview-fullscreen-button",
           action: "click",
           optLabel: "button",
@@ -422,7 +422,7 @@ export default {
     },
     @track(
       after(function() {
-        Track.eventTrack({
+        Track.eventTrack(this.$store,{
           category: "market-detail-preview-close-button",
           action: "click",
           optLabel: "button",
